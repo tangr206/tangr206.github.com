@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-18T22:08:05+08:00</updated>
+  <updated>2013-04-18T22:10:46+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -37,17 +37,17 @@ fatal: remote origin already exists.</p>
 <p>解决办法：
 $ git remote rm origin
 $ git remote add origin git@github.com:defnngj/hello-world.git
-```
-就不会报错误了</p>
+就不会报错误了
+```</p>
 
-<p>3.虽然按照官网流程完成了ssh相关的配置的安装，但是deploy的
-  时候还是提示Permission denied (publickey).错误
+<p>3.虽然按照官网流程完成了ssh相关的配置的安装，
+但是deploy的时候还是提示Permission denied (publickey).错误
 ```bash
 $ rake deply
 Agent admitted failure to sign using the key.
 Permission denied (publickey).</p>
 
-<p>解决办法：  http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating
+<p>解决办法[http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating]
 $ sh-add ~/.ssh/id_rsa
 ```</p>
 

@@ -124,6 +124,7 @@ Could not find RedCloth-4.2.9 in any of the &hellip;">
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
+<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add origin git@github.com:defnngj/hello-world.git
 </span><span class='line'>错误提示：
 </span><span class='line'>fatal: remote origin already exists.
@@ -131,13 +132,12 @@ Could not find RedCloth-4.2.9 in any of the &hellip;">
 </span><span class='line'>解决办法：
 </span><span class='line'><span class="nv">$ </span>git remote rm origin
 </span><span class='line'><span class="nv">$ </span>git remote add origin git@github.com:defnngj/hello-world.git
+</span><span class='line'>就不会报错误了
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>就不会报错误了</p>
-
-<p>3.虽然按照官网流程完成了ssh相关的配置的安装，但是deploy的
-  时候还是提示Permission denied (publickey).错误</p>
+<p>3.虽然按照官网流程完成了ssh相关的配置的安装，
+但是deploy的时候还是提示Permission denied (publickey).错误</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -149,7 +149,7 @@ Could not find RedCloth-4.2.9 in any of the &hellip;">
 </span><span class='line'>Agent admitted failure to sign using the key.
 </span><span class='line'>Permission denied <span class="o">(</span>publickey<span class="o">)</span>.
 </span><span class='line'>
-</span><span class='line'>解决办法：  http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating
+</span><span class='line'>解决办法<span class="o">[</span>http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating<span class="o">]</span>
 </span><span class='line'><span class="nv">$ </span>sh-add ~/.ssh/id_rsa
 </span></code></pre></td></tr></table></div></figure>
 

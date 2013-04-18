@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-18T21:49:38+08:00</updated>
+  <updated>2013-04-18T22:01:35+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -19,25 +19,40 @@
     <updated>2013-04-18T20:44:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/18/hi-octopress</id>
     <content type="html"><![CDATA[<p>1.Ubuntu中如果装了两个版本的ruby在使用时会有问题
-<code>``shell  new_post 异常
+<code>bash
 root@tom:~/CODE_HOST/Octopress/myblog# rake new_post["usefull git &amp; rake commands"]
 Could not find RedCloth-4.2.9 in any of the sources
-Run</code>bundle install` to install missing gems.</p>
+Run `bundle install` to install missing gems.
+</code></p>
 
 <p>解决办法： 可以使用rvm选择ruby版本
+<code>
 rvm use ruby-1.9.2-p290
-```</p>
+</code></p>
 
 <p>2.在执行
-```
+<code>bash
 $ git remote add origin git@github.com:defnngj/hello-world.git
-错误提示：fatal: remote origin already exists.</p>
+</code>
+错误提示：
+<code>
+fatal: remote origin already exists.
+</code></p>
 
 <p>解决办法：
+<code>
 $ git remote rm origin
-然后在执行：
-$ git remote add origin git@github.com:defnngj/hello-world.git 就不会报错误了
-```</p>
+$ git remote add origin git@github.com:defnngj/hello-world.git
+</code>
+就不会报错误了</p>
+
+<p>3.虽然按照官网流程完成了ssh相关的配置的安装，但是deploy的
+  时候还是提示Permission denied (publickey).错误
+<code>bash
+root@tom:~/CODE_HOST/Octopress/myblog# rake deply
+Agent admitted failure to sign using the key.
+Permission denied (publickey).
+</code></p>
 
 <p>------------------------------------以下是copy的安装流程----------------------------------</p>
 

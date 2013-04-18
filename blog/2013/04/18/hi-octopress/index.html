@@ -5,15 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hi OctoPress  安装中的一些坑 - tangr206's Blog</title>
+  <title>hi OctoPress.  安装中的一些坑 - tangr206's Blog</title>
   <meta name="author" content="tom">
 
   
-  <meta name="description" content="1
+  <meta name="description" content="Ubuntu中如果装了两个版本的ruby在使用时会有问题 1
 2
 3
 root@tom:~/CODE_HOST/Octopress/myblog# rake new_post[&quot;usefull git &amp; rake commands&quot;]
-Could not find RedCloth-4.2.9 in any of the &hellip;">
+Could not find &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +72,7 @@ Could not find RedCloth-4.2.9 in any of the &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Hi OctoPress 安装中的一些坑</h1>
+      <h1 class="entry-title">Hi OctoPress. 安装中的一些坑</h1>
     
     
       <p class="meta">
@@ -95,12 +95,21 @@ Could not find RedCloth-4.2.9 in any of the &hellip;">
   </header>
 
 
-<div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="entry-content"><p>Ubuntu中如果装了两个版本的ruby在使用时会有问题</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>root@tom:~/CODE_HOST/Octopress/myblog# rake new_post<span class="o">[</span><span class="s2">&quot;usefull git &amp; rake commands&quot;</span><span class="o">]</span>
 </span><span class='line'>Could not find RedCloth-4.2.9 in any of the sources
 </span><span class='line'>Run <span class="sb">`</span>bundle install<span class="sb">`</span> to install missing gems.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以使用rvm选择ruby版本</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use ruby-1.9.2-p290
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -333,7 +342,7 @@ Could not find RedCloth-4.2.9 in any of the &hellip;">
       </li>
     
       <li class="post">
-        <a href="/blog/2013/04/18/hi-octopress/">hi OctoPress  安装中的一些坑</a>
+        <a href="/blog/2013/04/18/hi-octopress/">hi OctoPress.  安装中的一些坑</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-18T21:39:44+08:00</updated>
+  <updated>2013-04-18T21:42:10+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -23,16 +23,25 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[hi OctoPress  安装中的一些坑]]></title>
+    <title type="html"><![CDATA[hi OctoPress.  安装中的一些坑]]></title>
     <link href="http://tangr206.github.io/blog/2013/04/18/hi-octopress/"/>
     <updated>2013-04-18T20:44:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/18/hi-octopress</id>
-    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    <content type="html"><![CDATA[<p>Ubuntu中如果装了两个版本的ruby在使用时会有问题</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>root@tom:~/CODE_HOST/Octopress/myblog# rake new_post<span class="o">[</span><span class="s2">&quot;usefull git &amp; rake commands&quot;</span><span class="o">]</span>
 </span><span class='line'>Could not find RedCloth-4.2.9 in any of the sources
 </span><span class='line'>Run <span class="sb">`</span>bundle install<span class="sb">`</span> to install missing gems.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以使用rvm选择ruby版本</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use ruby-1.9.2-p290
 </span></code></pre></td></tr></table></div></figure>
 
 

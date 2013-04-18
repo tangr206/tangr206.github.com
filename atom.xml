@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-18T22:01:35+08:00</updated>
+  <updated>2013-04-18T22:06:26+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -32,38 +32,33 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@tom:~/CODE_HOST/Octopress/myblog# rake new_post<span class="o">[</span><span class="s2">&quot;usefull git &amp; rake commands&quot;</span><span class="o">]</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># rake new_post[&quot;usefull git &amp; rake commands&quot;]</span>
 </span><span class='line'>Could not find RedCloth-4.2.9 in any of the sources
 </span><span class='line'>Run <span class="sb">`</span>bundle install<span class="sb">`</span> to install missing gems.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解决办法： 可以使用rvm选择ruby版本</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use ruby-1.9.2-p290
+</span><span class='line'>
+</span><span class='line'>解决办法： 可以使用rvm选择ruby版本
+</span><span class='line'><span class="nv">$rvm</span> use ruby-1.9.2-p290
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>2.在执行</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add origin git@github.com:defnngj/hello-world.git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>错误提示：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>fatal: remote origin already exists.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解决办法：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote rm origin
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add origin git@github.com:defnngj/hello-world.git
+</span><span class='line'>错误提示：
+</span><span class='line'>fatal: remote origin already exists.
+</span><span class='line'>
+</span><span class='line'>解决办法：
+</span><span class='line'><span class="nv">$ </span>git remote rm origin
 </span><span class='line'><span class="nv">$ </span>git remote add origin git@github.com:defnngj/hello-world.git
 </span></code></pre></td></tr></table></div></figure>
 
@@ -76,9 +71,15 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@tom:~/CODE_HOST/Octopress/myblog# rake deply
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake deply
 </span><span class='line'>Agent admitted failure to sign using the key.
 </span><span class='line'>Permission denied <span class="o">(</span>publickey<span class="o">)</span>.
+</span><span class='line'>
+</span><span class='line'>解决办法：  http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating
+</span><span class='line'><span class="c"># sh-add ~/.ssh/id_rsa</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

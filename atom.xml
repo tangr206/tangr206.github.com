@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-18T20:47:51+08:00</updated>
+  <updated>2013-04-18T20:53:07+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -18,7 +18,8 @@
     <link href="http://tangr206.github.io/blog/2013/04/18/hi-octopress/"/>
     <updated>2013-04-18T20:44:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/18/hi-octopress</id>
-    <content type="html"><![CDATA[<p>MyBlog[http://www.cnblogs.com/tangr206/archive/2013/04/16/3024472.html]</p>
+    <content type="html"><![CDATA[<p>MyBlog[http://www.cnblogs.com/tangr206/archive/2013/04/16/3024472.html]
+这是一个中文测试</p>
 ]]></content>
   </entry>
   

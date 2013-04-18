@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | My Octopress Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-18T20:53:07+08:00</updated>
+  <updated>2013-04-18T20:55:20+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[hi OctoPress]]></title>
+    <title type="html"><![CDATA[hi OctoPress  安装中的一些坑]]></title>
     <link href="http://tangr206.github.io/blog/2013/04/18/hi-octopress/"/>
     <updated>2013-04-18T20:44:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/18/hi-octopress</id>

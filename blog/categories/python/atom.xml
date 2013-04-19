@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:37:30+08:00</updated>
+  <updated>2013-04-19T18:41:26+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -46,29 +46,25 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 ('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
 ```</p></blockquote></blockquote></blockquote>
 
-<p>++ #### key参数的使用</p>
+<ul>
+<li><h4>key参数的使用</h4>
 
-<h5>key参数指定一个函数，</h5>
-
-<h5>这个函数的实参为每个迭代器的item，经过该函数运算，返回值为每个item中需要进行对比的项（key）</h5>
-
-<p>简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
+key参数指定一个函数，这个函数的 <strong> 实参为每个迭代器的item </strong>，经过该函数运算，<strong><em>返回值为每个item中需要进行对比的项（key）</em></strong>
+简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
 如下实例：
-```</p>
+```
 
 <blockquote><blockquote><blockquote><p>sorted("This is a test string from Andrew".split(), key=str.lower)
 ['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']
-```</p></blockquote></blockquote></blockquote>
+```</p></blockquote></blockquote></blockquote></li>
+</ul>
+
 
 <h4>+ 使用Operator模块</h4>
 
-<h5>operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，</h5>
-
-<h5>所以如果很关心sort效率，可以考虑在sorted中使用itemgetter</h5>
-
 <p>由于以上使用key参数的方式十分普遍，python提供了相关函数，使以上方式的使用更加简单快捷。</p>
 
-<p>operator模块提供了 operator.itemgetter(),operator.attrgetter()函数，
+<p>operator模块提供了 <strong>operator.itemgetter(),operator.attrgetter()</strong>函数，
 在 Python 2.5以后还提供了operator.methodcaller() 函数。
 使用这些函数可以让上节描述的排序方法更加快捷方便：
 ```</p>
@@ -86,9 +82,8 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 <blockquote><blockquote><blockquote><p>a = [1,2,3] <br/>
 b=operator.itemgetter(1) <br/>
 b(a) <br/>
-2</p>
-
-<p>student_tuples = [</p>
+2
+student_tuples = [</p>
 
 <pre><code>('john', 'A', 15),
 ('jane', 'B', 12),
@@ -106,7 +101,9 @@ sorted(student_tuples, key=itemgetter(2))
 <p>sorted(student_objects, key=attrgetter('age'))
 [('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p></blockquote></blockquote></blockquote>
 
-<p>```</p>
+<p>```
+operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，
+所以如果很关心 <strong> sort效率 </strong> ，可以考虑在sorted中使用itemgetter</p>
 
 <ul>
 <li><h4>list.sort()与sorted() 区别</h4></li>

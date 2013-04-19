@@ -155,14 +155,14 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>++ #### key参数的使用</p>
+<ul>
+<li><h4>key参数的使用</h4>
 
-<h5>key参数指定一个函数，</h5>
+<p>key参数指定一个函数，这个函数的 <strong> 实参为每个迭代器的item </strong>，经过该函数运算，<strong><em>返回值为每个item中需要进行对比的项（key）</em></strong>
+简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
+如下实例：</p></li>
+</ul>
 
-<h5>这个函数的实参为每个迭代器的item，经过该函数运算，返回值为每个item中需要进行对比的项（key）</h5>
-
-<p>简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
-如下实例：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -173,13 +173,9 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 
 <h4>+ 使用Operator模块</h4>
 
-<h5>operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，</h5>
-
-<h5>所以如果很关心sort效率，可以考虑在sorted中使用itemgetter</h5>
-
 <p>由于以上使用key参数的方式十分普遍，python提供了相关函数，使以上方式的使用更加简单快捷。</p>
 
-<p>operator模块提供了 operator.itemgetter(),operator.attrgetter()函数，
+<p>operator模块提供了 <strong>operator.itemgetter(),operator.attrgetter()</strong>函数，
 在 Python 2.5以后还提供了operator.methodcaller() 函数。
 使用这些函数可以让上节描述的排序方法更加快捷方便：</p>
 
@@ -206,7 +202,6 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#Modules/operator.c</span>
 </span><span class='line'><span class="c">#itemgetter</span>
 </span><span class='line'><span class="c">#Return a callable object that fetches the given item(s) from its operand.\n\</span>
@@ -216,7 +211,6 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </span><span class='line'><span class="mi">2</span>
-</span><span class='line'>
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">student_tuples</span> <span class="o">=</span> <span class="p">[</span>
 </span><span class='line'>    <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
 </span><span class='line'>    <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
@@ -224,7 +218,7 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 </span><span class='line'><span class="p">]</span>
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">student_tuples</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">student</span><span class="p">:</span> <span class="n">student</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>   <span class="c"># sort by age</span>
 </span><span class='line'><span class="p">[(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
-</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span><span class="p">,</span> <span class="n">attrgetter</span>
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">student_tuples</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </span><span class='line'><span class="p">[(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
@@ -233,6 +227,9 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 </span><span class='line'><span class="p">[(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，
+所以如果很关心 <strong> sort效率 </strong> ，可以考虑在sorted中使用itemgetter</p>
 
 <ul>
 <li><h4>list.sort()与sorted() 区别</h4></li>

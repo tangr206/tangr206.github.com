@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:31:35+08:00</updated>
+  <updated>2013-04-19T18:35:36+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -18,17 +18,20 @@
     <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
     <updated>2013-04-19T17:49:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
-    <content type="html"><![CDATA[<h4>+ 复杂结构指定Key排序</h4>
+    <content type="html"><![CDATA[<ul>
+<li><h4>复杂结构指定Key排序</h4>
 
-<p>先看一个例子：
+先看一个例子：
 ```python
-D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "04-13":[45, 44444, 45454]},  \</p>
+D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "04-13":[45, 44444, 45454]},  \
 
-<pre><code>    "serverB":{ "04-12":[12, 2333, 1232343], "04-15":[34, 35555, 343432], "04-13":[45, 34444, 45454]}, \
-    "serverC":{ "04-12":[12, 3333, 1232343], "04-15":[34, 25555, 343432], "04-13":[45, 24444, 45454]}, \
-    "serverD":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 343432], "04-13":[45, 14444, 45454]}, \
-    }   
-</code></pre>
+<pre><code>  "serverB":{ "04-12":[12, 2333, 1232343], "04-15":[34, 35555, 343432], "04-13":[45, 34444, 45454]}, \
+  "serverC":{ "04-12":[12, 3333, 1232343], "04-15":[34, 25555, 343432], "04-13":[45, 24444, 45454]}, \
+  "serverD":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 343432], "04-13":[45, 14444, 45454]}, \
+  }   
+</code></pre></li>
+</ul>
+
 
 <h1>如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：</h1>
 
@@ -43,19 +46,22 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 ('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
 ```</p></blockquote></blockquote></blockquote>
 
-<h4>+ key参数的使用</h4>
+<ul>
+<li><h4>+ key参数的使用</h4>
 
 <h5>key参数指定一个函数，</h5>
 
 <h5>这个函数的实参为每个迭代器的item，经过该函数运算，返回值为每个item中需要进行对比的项（key）</h5>
 
-<p>简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
+简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
 如下实例：
-```</p>
+```
 
 <blockquote><blockquote><blockquote><p>sorted("This is a test string from Andrew".split(), key=str.lower)
 ['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']
-```</p></blockquote></blockquote></blockquote>
+```</p></blockquote></blockquote></blockquote></li>
+</ul>
+
 
 <h4>+ 使用Operator模块</h4>
 
@@ -70,7 +76,22 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 使用这些函数可以让上节描述的排序方法更加快捷方便：
 ```</p>
 
-<blockquote><blockquote><blockquote><p>student_tuples = [</p>
+<h1>Modules/operator.c</h1>
+
+<h1>itemgetter</h1>
+
+<h1>Return a callable object that fetches the given item(s) from its operand.\n\</h1>
+
+<h1>After, f=itemgetter(2), the call f(r) returns r[2].\n\</h1>
+
+<h1>After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])");</h1>
+
+<blockquote><blockquote><blockquote><p>a = [1,2,3] <br/>
+b=operator.itemgetter(1) <br/>
+b(a) <br/>
+2</p>
+
+<p>student_tuples = [</p>
 
 <pre><code>('john', 'A', 15),
 ('jane', 'B', 12),

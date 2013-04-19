@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:31:35+08:00</updated>
+  <updated>2013-04-19T18:35:36+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -18,9 +18,12 @@
     <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
     <updated>2013-04-19T17:49:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
-    <content type="html"><![CDATA[<h4>+ 复杂结构指定Key排序</h4>
+    <content type="html"><![CDATA[<ul>
+<li><h4>复杂结构指定Key排序</h4>
 
-<p>先看一个例子：</p>
+<p>先看一个例子：</p></li>
+</ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -61,14 +64,17 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>+ key参数的使用</h4>
+<ul>
+<li><h4>+ key参数的使用</h4>
 
 <h5>key参数指定一个函数，</h5>
 
 <h5>这个函数的实参为每个迭代器的item，经过该函数运算，返回值为每个item中需要进行对比的项（key）</h5>
 
 <p>简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
-如下实例：</p>
+如下实例：</p></li>
+</ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -103,7 +109,27 @@
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">student_tuples</span> <span class="o">=</span> <span class="p">[</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#Modules/operator.c</span>
+</span><span class='line'><span class="c">#itemgetter</span>
+</span><span class='line'><span class="c">#Return a callable object that fetches the given item(s) from its operand.\n\</span>
+</span><span class='line'><span class="c">#After, f=itemgetter(2), the call f(r) returns r[2].\n\</span>
+</span><span class='line'><span class="c">#After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])&quot;);</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">student_tuples</span> <span class="o">=</span> <span class="p">[</span>
 </span><span class='line'>    <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
 </span><span class='line'>    <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
 </span><span class='line'>    <span class="p">(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>

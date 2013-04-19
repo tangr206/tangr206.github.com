@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:41:26+08:00</updated>
+  <updated>2013-04-19T18:46:55+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -67,7 +67,7 @@
 <ul>
 <li><h4>key参数的使用</h4>
 
-<p>key参数指定一个函数，这个函数的 <strong> 实参为每个迭代器的item </strong>，经过该函数运算，<strong><em>返回值为每个item中需要进行对比的项（key）</em></strong>
+<p>key参数指定一个函数，这个函数的 <strong> 实参为每个迭代器的item </strong>，经过该函数运算，<strong>返回值为每个item中需要进行对比的项（key）</strong>
 简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
 如下实例：</p></li>
 </ul>
@@ -80,7 +80,10 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>+ 使用Operator模块</h4>
+<ul>
+<li><h4>使用Operator模块</h4></li>
+</ul>
+
 
 <p>由于以上使用key参数的方式十分普遍，python提供了相关函数，使以上方式的使用更加简单快捷。</p>
 
@@ -142,8 +145,12 @@
 
 <ul>
 <li><h4>list.sort()与sorted() 区别</h4></li>
+<li>第一,list.sort()没有返回值，只对list原地排序；而sorted()将排序后序列作为新list返回</li>
+<li>第二，list.sort()只应用于list，而sorted()可用于任意迭代器</li>
 </ul>
 
+
+<p><a href="http://docs.python.org/2/howto/sorting.html">参考</a></p>
 ]]></content>
   </entry>
   

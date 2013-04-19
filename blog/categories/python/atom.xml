@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:16:59+08:00</updated>
+  <updated>2013-04-19T18:31:35+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -18,11 +18,10 @@
     <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
     <updated>2013-04-19T17:49:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
-    <content type="html"><![CDATA[<h2>复杂结构指定Key排序</h2>
+    <content type="html"><![CDATA[<h4>+ 复杂结构指定Key排序</h4>
 
-<h3>1.先看一个例子：</h3>
-
-<p>```python
+<p>先看一个例子：
+```python
 D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "04-13":[45, 44444, 45454]},  \</p>
 
 <pre><code>    "serverB":{ "04-12":[12, 2333, 1232343], "04-15":[34, 35555, 343432], "04-13":[45, 34444, 45454]}, \
@@ -44,7 +43,54 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 ('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
 ```</p></blockquote></blockquote></blockquote>
 
-<h3>2.</h3>
+<h4>+ key参数的使用</h4>
+
+<h5>key参数指定一个函数，</h5>
+
+<h5>这个函数的实参为每个迭代器的item，经过该函数运算，返回值为每个item中需要进行对比的项（key）</h5>
+
+<p>简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
+如下实例：
+```</p>
+
+<blockquote><blockquote><blockquote><p>sorted("This is a test string from Andrew".split(), key=str.lower)
+['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']
+```</p></blockquote></blockquote></blockquote>
+
+<h4>+ 使用Operator模块</h4>
+
+<h5>operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，</h5>
+
+<h5>所以如果很关心sort效率，可以考虑在sorted中使用itemgetter</h5>
+
+<p>由于以上使用key参数的方式十分普遍，python提供了相关函数，使以上方式的使用更加简单快捷。</p>
+
+<p>operator模块提供了 operator.itemgetter(),operator.attrgetter()函数，
+在 Python 2.5以后还提供了operator.methodcaller() 函数。
+使用这些函数可以让上节描述的排序方法更加快捷方便：
+```</p>
+
+<blockquote><blockquote><blockquote><p>student_tuples = [</p>
+
+<pre><code>('john', 'A', 15),
+('jane', 'B', 12),
+('dave', 'B', 10),
+</code></pre>
+
+<p>]
+sorted(student_tuples, key=lambda student: student[2])   # sort by age
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p>
+
+<p>from operator import itemgetter, attrgetter
+sorted(student_tuples, key=itemgetter(2))
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p>
+
+<p>sorted(student_objects, key=attrgetter('age'))
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p></blockquote></blockquote></blockquote>
+
+<p>```</p>
+
+<h4>+ list.sort()与sorted() 区别</h4>
 ]]></content>
   </entry>
   

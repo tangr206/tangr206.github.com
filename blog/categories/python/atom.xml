@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: python | tangr206's Blog]]></title>
+  <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://tangr206.github.io/"/>
+  <updated>2013-04-19T18:16:59+08:00</updated>
+  <id>http://tangr206.github.io/</id>
+  <author>
+    <name><![CDATA[tom]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python 排序]]></title>
+    <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
+    <updated>2013-04-19T17:49:00+08:00</updated>
+    <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
+    <content type="html"><![CDATA[<h2>复杂结构指定Key排序</h2>
+
+<h3>1.先看一个例子：</h3>
+
+<p>```python
+D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "04-13":[45, 44444, 45454]},  \</p>
+
+<pre><code>    "serverB":{ "04-12":[12, 2333, 1232343], "04-15":[34, 35555, 343432], "04-13":[45, 34444, 45454]}, \
+    "serverC":{ "04-12":[12, 3333, 1232343], "04-15":[34, 25555, 343432], "04-13":[45, 24444, 45454]}, \
+    "serverD":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 343432], "04-13":[45, 14444, 45454]}, \
+    }   
+</code></pre>
+
+<h1>如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：</h1>
+
+<p>res = sorted(D.items(), key=lambda x: x[1]["04-15"][1], reverse=1)</p>
+
+<p>for item in res:
+  print item</p>
+
+<blockquote><blockquote><blockquote><p>('serverD', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 343432]})
+('serverB', {'04-13': [45, 34444, 45454], '04-12': [12, 2333, 1232343], '04-15': [34, 35555, 343432]})
+('serverC', {'04-13': [45, 24444, 45454], '04-12': [12, 3333, 1232343], '04-15': [34, 25555, 343432]})
+('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
+```</p></blockquote></blockquote></blockquote>
+
+<h3>2.</h3>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T10:23:21+08:00</updated>
+  <updated>2013-04-19T18:16:59+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python 排序]]></title>
+    <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
+    <updated>2013-04-19T17:49:00+08:00</updated>
+    <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
+    <content type="html"><![CDATA[<h2>复杂结构指定Key排序</h2>
+
+<h3>1.先看一个例子：</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span> <span class="o">=</span> <span class="p">{</span>   <span class="s">&quot;serverA&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">15555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">44444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span>  \
+</span><span class='line'>        <span class="s">&quot;serverB&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">35555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">34444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
+</span><span class='line'>        <span class="s">&quot;serverC&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">25555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">24444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
+</span><span class='line'>        <span class="s">&quot;serverD&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">res</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">&quot;04-15&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">print</span> <span class="n">item</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
+</span><span class='line'><span class="p">(</span><span class="s">&#39;serverD&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
+</span><span class='line'><span class="p">(</span><span class="s">&#39;serverB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">34444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">35555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
+</span><span class='line'><span class="p">(</span><span class="s">&#39;serverC&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">24444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">25555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
+</span><span class='line'><span class="p">(</span><span class="s">&#39;serverA&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">44444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">15555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.</h3>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[usefull git &amp; rake commands]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:35:36+08:00</updated>
+  <updated>2013-04-19T18:37:30+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -46,22 +46,19 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 ('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
 ```</p></blockquote></blockquote></blockquote>
 
-<ul>
-<li><h4>+ key参数的使用</h4>
+<p>++ #### key参数的使用</p>
 
 <h5>key参数指定一个函数，</h5>
 
 <h5>这个函数的实参为每个迭代器的item，经过该函数运算，返回值为每个item中需要进行对比的项（key）</h5>
 
-简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
+<p>简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
 如下实例：
-```
+```</p>
 
 <blockquote><blockquote><blockquote><p>sorted("This is a test string from Andrew".split(), key=str.lower)
 ['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']
-```</p></blockquote></blockquote></blockquote></li>
-</ul>
-
+```</p></blockquote></blockquote></blockquote>
 
 <h4>+ 使用Operator模块</h4>
 
@@ -111,7 +108,10 @@ sorted(student_tuples, key=itemgetter(2))
 
 <p>```</p>
 
-<h4>+ list.sort()与sorted() 区别</h4>
+<ul>
+<li><h4>list.sort()与sorted() 区别</h4></li>
+</ul>
+
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:51:54+08:00</updated>
+  <updated>2013-04-19T18:55:03+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -38,7 +38,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>&#8212;&#8211;!more&#8212;&#8211;</p>
+<!--more-->
+
 
 <p>如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：</p>
 

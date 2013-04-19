@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T18:51:54+08:00</updated>
+  <updated>2013-04-19T18:55:03+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -31,9 +31,11 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
   }   
 </code></pre>
 
-<p>```
------!more-----</p></li>
+<p>```</p></li>
 </ul>
+
+
+<!--more-->
 
 
 <p>如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：

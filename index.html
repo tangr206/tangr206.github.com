@@ -119,119 +119,12 @@ D = { &quot;serverA&quot;:{ &quot;04-12&quot;:[12, 1333, 1232343], &quot;04-15&q
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>&#8212;&#8211;!more&#8212;&#8211;</p>
-
-<p>如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s">&quot;04-15&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>   <span class="k">print</span> <span class="n">item</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;serverD&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;serverB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">34444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">35555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;serverC&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">24444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">25555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;serverA&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;04-13&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">44444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">],</span> <span class="s">&#39;04-12&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&#39;04-15&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">15555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">]})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><h4>key参数的使用</h4>
-
-<p>key参数指定一个函数，这个函数的 <strong> 实参为每个迭代器的item </strong>，经过该函数运算，<strong>返回值为每个item中需要进行对比的项（key）</strong>
-简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
-如下实例：</p></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="s">&quot;This is a test string from Andrew&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;Andrew&#39;</span><span class="p">,</span> <span class="s">&#39;from&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">,</span> <span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="s">&#39;This&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><h4>使用Operator模块</h4></li>
-</ul>
-
-
-<p>由于以上使用key参数的方式十分普遍，python提供了相关函数，使以上方式的使用更加简单快捷。</p>
-
-<p>operator模块提供了 <strong>operator.itemgetter(),operator.attrgetter()</strong>函数，
-在 Python 2.5以后还提供了operator.methodcaller() 函数。
-使用这些函数可以让上节描述的排序方法更加快捷方便：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#Modules/operator.c</span>
-</span><span class='line'><span class="c">#itemgetter</span>
-</span><span class='line'><span class="c">#Return a callable object that fetches the given item(s) from its operand.\n\</span>
-</span><span class='line'><span class="c">#After, f=itemgetter(2), the call f(r) returns r[2].\n\</span>
-</span><span class='line'><span class="c">#After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])&quot;);</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span><span class='line'><span class="mi">2</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">student_tuples</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-</span><span class='line'><span class="p">]</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">student_tuples</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">student</span><span class="p">:</span> <span class="n">student</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>   <span class="c"># sort by age</span>
-</span><span class='line'><span class="p">[(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span><span class="p">,</span> <span class="n">attrgetter</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">student_tuples</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</span><span class='line'><span class="p">[(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">student_objects</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">attrgetter</span><span class="p">(</span><span class="s">&#39;age&#39;</span><span class="p">))</span>
-</span><span class='line'><span class="p">[(</span><span class="s">&#39;dave&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;jane&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，
-所以如果很关心 <strong> sort效率 </strong> ，可以考虑在sorted中使用itemgetter</p>
-
-<ul>
-<li><h4>list.sort()与sorted() 区别</h4>
-
-<p>++ 第一,list.sort()没有返回值，只对list原地排序；而sorted()将排序后序列作为新list返回
-++ 第二，list.sort()只应用于list，而sorted()可用于任意迭代器</p></li>
-</ul>
-
-
-<p><a href="http://docs.python.org/2/howto/sorting.html">参考</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/19/python-sort/">Read on &rarr;</a>
+    </footer>
   
 
 

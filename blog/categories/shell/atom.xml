@@ -4,7 +4,7 @@
   <title><![CDATA[Category: shell | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-21T17:25:32+08:00</updated>
+  <updated>2013-04-21T18:10:48+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -21,16 +21,15 @@
     <content type="html"><![CDATA[<ul>
 <li><h3>find 查找当前目录下在5分钟内被**过的文件</h3>
 
-```bash
-
-<blockquote><blockquote><blockquote><p>find . -amin -5
-```</p></blockquote></blockquote></blockquote></li>
+<p><code>find . -amin -5</code></p></li>
 <li><p>访问过用amin，修改过用mmin，文件状态改变过用cmin</p></li>
-<li><p>精确到分钟的用i<strong>amin,mmin,cmin</strong></p></li>
-<li><p>精确到天的用<strong>atime,mtime,ctime</strong></p></li>
+<li><p>精确到分钟的用i <strong> amin,mmin,cmin </strong></p></li>
+<li><p>精确到天的用 <strong> atime,mtime,ctime </strong></p></li>
 <li><p>在5分钟之内的用-5，在5分钟以上的用＋5</p></li>
 </ul>
 
+
+<hr />
 ]]></content>
   </entry>
   

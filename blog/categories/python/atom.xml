@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-21T17:25:32+08:00</updated>
+  <updated>2013-04-21T18:10:48+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -18,13 +18,9 @@
     <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
     <updated>2013-04-19T17:49:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
-    <content type="html"><![CDATA[<p>li sdf li</p>
-
-<p><a href="http://www.python.org/dev/peps/pep-0265/">字典排序入门,</a> : 解释为什么python中的字典不提供sort函数</p>
+    <content type="html"><![CDATA[<p><a href="http://www.python.org/dev/peps/pep-0265/">字典排序入门,</a> : 解释为什么python中的字典不提供sort函数</p>
 
 <p><a href="http://zuroc.42qu.com/10492195">Python中最快的字典排序方法</a> : 简单的说, 用itemgetter比lambda快, iteritems比其他快</p>
-
-<p>li sdasdfjkasdjkf li</p>
 
 <ul>
 <li><h4>复杂结构指定Key排序</h4>
@@ -119,10 +115,10 @@ operator中还有其它常用的函数，他们都是用c实现的，在效率�
 <a href="http://www.ibm.com/developerworks/cn/cloud/library/cl-bigdata/">比如MapReduce中大量使用字典排序</a></p>
 
 <ul>
-<li><h4>list.sort()与sorted() 区别</h4>
+<li><h4><code>list.sort()</code> 与<code>sorted()</code> 区别</h4>
 
-<p>++ 第一,list.sort()没有返回值，只对list原地排序；而sorted()将排序后序列作为新list返回
-++ 第二，list.sort()只应用于list，而sorted()可用于任意迭代器</p></li>
+<p>++ 第一,<code>list.sort()</code>没有返回值，只对list原地排序；而<code>sorted()</code>将排序后序列作为新list返回
+++ 第二，<code>list.sort()</code>只应用于list，而<code>sorted()</code>可用于任意迭代器</p></li>
 </ul>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-21T18:10:48+08:00</updated>
+  <updated>2013-04-21T19:22:34+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -18,7 +18,203 @@
     <link href="http://tangr206.github.io/blog/2013/04/21/python-tee/"/>
     <updated>2013-04-21T18:08:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/21/python-tee</id>
-    <content type="html"><![CDATA[<p><img src="http://tangr206.github.io/images/python.tee.png" alt="tee" /></p>
+    <content type="html"><![CDATA[<p>部分摘自 <a href="http://jezng.com/2012/06/inside-python-tee/#fn:1">Inside Python&#8217;s itertools.tee()</a></p>
+
+<p><img src="http://tangr206.github.io/images/2013/python_tee.png" alt="tee" /></p>
+
+<h3>WHAT</h3>
+
+<p>python.iteratools.tee :
+<strong> <code>Return n independent iterators from a single iterable.</code> </strong></p>
+
+<!--more-->
+
+
+<p>注意：
+<code>  
+Once tee() has made a split, the original iterable should not be used anywhere else;
+otherwise, the iterable could get advanced without the tee objects being informed.
+</code></p>
+
+<h3>WHY</h3>
+
+<p>instead of copying the iterable n times. The tee() uses some heuristics and strategies to
+make the generation of these n iterators more memory efficient.</p>
+
+<h3>DETAIL</h3>
+
+<h4>Iterables, Iterators, and the Iterator Protocol</h4>
+
+<ol>
+<li><strong> Iterables </strong> are Python objects that define an <code>__iter__()</code> method, which, when called, returns an iterator.</li>
+<li><strong> Iterators </strong> define the <code>__iter__()</code> method as well, but implement it by simply returning the iterator itself.
+<strong> Iterators </strong> also implement a <code>next()</code> method, which returns the next element in a sequence.
+To signal the end of a sequence, <code>next()</code> raises a StopIteration exception.</li>
+<li>Any object that implements both <code>__iter__</code> and <code>next</code> in the aforementioned manner is said to implement the iterator protocol.</li>
+</ol>
+
+
+<p><a href="http://chenyufei.info/blog/2009-04-20/python-iterator-protocol-and-generator/">参考</a></p>
+
+<p><strong> iterator protocol </strong> 使得我们可以对不同的容器（其实是任何支持遍历操作的对象，不一定是用来存放数据的容器）使用相同的方式（for 语句）进行遍历。容器可以是 list, dictionary 或者是其他用户定义的数据结构，它只需要实现 iter()方法，返回一个 iterator object 即可。真正关心如何遍历的是 iterator object，它的两个方法构成了 iterator protocol。</p>
+
+<ol>
+<li><strong>iter</strong>() 返回自身</li>
+<li>next() 返回容器中的下一个对象，没有更多对象时应 raise StopIteration，一旦抛出此异常，后续的调用一定也必须抛出此异常。</li>
+</ol>
+
+
+<p><a href="http://docs.python.org/2/library/stdtypes.html#iterator-types">PythonDoc:</a></p>
+
+<ol>
+<li>container.<strong>iter</strong>()  Return an iterator object
+The iterator objects themselves are required to support the following two methods,
+which together form the iterator protocol:
+2.1  iterator.<strong>iter</strong>()   Return the iterator object itself. <br/>
+2.2  iterator.next()       Return the next item from the container.</li>
+<li>Python&#8217;s <strong> generators </strong> provide a convenient way to implement the iterator protocol.
+If a container object&#8217;s <strong>iter</strong>() method is implemented as a generator,
+it will automatically return an iterator object (technically, a generator object)
+supplying the <strong>iter</strong>() and next() methods.</li>
+</ol>
+
+
+<h4><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/">generator</a></h4>
+
+<p>简单地讲，<code>yield</code> 的作用就是把一个函数变成一个 <code>generator</code>，带有 yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，调用 fab(5) 不会执行 fab 函数，而是返回一个 iterable 对象！在 for 循环执行时，每次循环都会执行 fab 函数内部的代码，执行到 yield b 时，fab 函数就返回一个迭代值，下次迭代时，代码从 yield b 的下一条语句继续执行，而函数的本地变量看起来和上次中断执行前是完全一样的，于是函数继续执行，直到再次遇到 yield。</p>
+
+<p>Python’s iterator protocol is simple to implement, and it works well for the common use case of for .. in loops.</p>
+
+<p>正是因为很容易实现 Iterator Protocol . 所以我们可以在这里面做很多扩展：</p>
+
+<p>将遍历过的元素缓存起来下次直接发回（同时可以用引用计数管理这些缓存的元素）</p>
+
+<p><strong> Sometimes Buffering is Useful </strong>： The list itself is populated lazily – whenever any of the n iterators asks for a value at an index that is not yet in the buffer, tee() calls next on the underlying iterator, then caches and returns the new value.</p>
+
+<p><img src="http://tangr206.github.io/images/2013/python_tee2.png" alt="tee_ref_count" /></p>
+
+<h3>HOW</h3>
+
+<figure class='code'><figcaption><span>tee的简单实现</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'> <span class="k">class</span> <span class="nc">TeeIterator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">tee_data</span><span class="p">):</span>
+</span><span class='line'>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tee_data</span><span class="p">,</span> <span class="n">TeeData</span><span class="p">):</span>
+</span><span class='line'>                <span class="bp">self</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">TeeIterator</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+</span><span class='line'>                <span class="bp">self</span><span class="o">.</span><span class="n">tee_data</span> <span class="o">=</span> <span class="n">tee_data</span>
+</span><span class='line'>            <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>                <span class="bp">self</span> <span class="o">=</span> <span class="n">TeeIterator</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">tee_data</span><span class="p">)</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>            <span class="k">return</span> <span class="bp">self</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">TeeIterator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tee_data</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>            <span class="k">return</span> <span class="bp">self</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tee_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">rv</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nd">@classmethod</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">from_iterable</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+</span><span class='line'>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">iterable</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span>
+</span><span class='line'>            <span class="n">tee_data</span> <span class="o">=</span> <span class="n">TeeData</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">TeeIterator</span><span class="p">(</span><span class="n">tee_data</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">class</span> <span class="nc">TeeData</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterator</span><span class="p">):</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">iterator</span> <span class="o">=</span> <span class="n">iterator</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">):</span>
+</span><span class='line'>                <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">tee</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;n must be &gt;= 0&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">return</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="s">&#39;__copy__&#39;</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">copyable</span> <span class="o">=</span> <span class="n">iterable</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">copyable</span> <span class="o">=</span> <span class="n">TeeIterator</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span> <span class="n">copyable</span> <span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copyable</span><span class="o">.</span><span class="n">__copy__</span><span class="p">())</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 ]]></content>
   </entry>
   
@@ -31,10 +227,10 @@
 <li><h3>find 查找当前目录下在5分钟内被**过的文件</h3>
 
 <p><code>find . -amin -5</code></p></li>
-<li><p>访问过用amin，修改过用mmin，文件状态改变过用cmin</p></li>
-<li><p>精确到分钟的用i <strong> amin,mmin,cmin </strong></p></li>
-<li><p>精确到天的用 <strong> atime,mtime,ctime </strong></p></li>
-<li><p>在5分钟之内的用-5，在5分钟以上的用＋5</p></li>
+<li>访问过用amin，修改过用mmin，文件状态改变过用cmin</li>
+<li>精确到分钟的用i <strong> amin,mmin,cmin </strong></li>
+<li>精确到天的用 <strong> atime,mtime,ctime </strong></li>
+<li>在5分钟之内的用-5，在5分钟以上的用＋5</li>
 </ul>
 
 

@@ -5,12 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>usefull git &amp; rake commands - tangr206's Blog</title>
+  <title>Linux Command 收集 - tangr206's Blog</title>
   <meta name="author" content="tom">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="find 查找当前目录下在5分钟内被**过的文件 1
+&gt;&gt;&gt; find . -amin -5 访问过用amin，修改过用mmin，文件状态改变过用cmin
+精确到分钟的用iamin,mmin,cmin
+精确到天的用atime,mtime,ctime
+在5分钟之内的用-5， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tangr206.github.io/blog/2013/04/18/usefull-git-and-rake-commands">
+  <link rel="canonical" href="http://tangr206.github.io/blog/2013/04/21/linux-command-learning">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="tangr206's Blog" type="application/atom+xml">
@@ -70,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">Usefull Git &amp; Rake Commands</h1>
+      <h1 class="entry-title">Linux Command 收集</h1>
     
     
       <p class="meta">
@@ -86,14 +89,30 @@
   
 
 
-<time datetime="2013-04-18T21:37:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
+<time datetime="2013-04-21T16:59:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><ul>
+<li><h3>find 查找当前目录下在5分钟内被**过的文件</h3></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;&gt;&gt; find . -amin -5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>访问过用amin，修改过用mmin，文件状态改变过用cmin</p></li>
+<li><p>精确到分钟的用i<strong>amin,mmin,cmin</strong></p></li>
+<li><p>精确到天的用<strong>atime,mtime,ctime</strong></p></li>
+<li><p>在5分钟之内的用-5，在5分钟以上的用＋5</p></li>
+</ul>
+
 </div>
 
 
@@ -116,8 +135,14 @@
   
 
 
-<time datetime="2013-04-18T21:37:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
+<time datetime="2013-04-21T16:59:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
 
 
     </p>
@@ -131,10 +156,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/04/18/hi-octopress/" title="Previous Post: OctoPress. 安装使用中的坑">&laquo; OctoPress. 安装使用中的坑</a>
+        <a class="basic-alignment left" href="/blog/2013/04/19/python-sort/" title="Previous Post: Python 排序">&laquo; Python 排序</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/04/19/python-sort/" title="Next Post: Python 排序">Python 排序 &raquo;</a>
       
     </p>
   </footer>

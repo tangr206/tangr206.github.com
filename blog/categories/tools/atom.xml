@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-19T21:42:45+08:00</updated>
+  <updated>2013-04-21T17:08:58+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -47,7 +47,7 @@ $ rake deply
 Agent admitted failure to sign using the key.
 Permission denied (publickey).</p>
 
-<p>解决办法[http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating]
+<p><a href="http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating">解决办法</a>
 $ sh-add ~/.ssh/id_rsa
 ```</p>
 

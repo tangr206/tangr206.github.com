@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-21T17:08:58+08:00</updated>
+  <updated>2013-04-21T17:25:32+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -50,6 +50,17 @@ Permission denied (publickey).</p>
 <p><a href="http://stackoverflow.com/questions/2546005/git-and-ssh-authorizating">解决办法</a>
 $ sh-add ~/.ssh/id_rsa
 ```</p>
+
+<p>4.<a href="http://blog.log4d.com/2012/05/tag-cloud/">添加标签和分类</a></p>
+
+<ol>
+<li>addfas</li>
+<li>addfas</li>
+<li>addfas</li>
+<li>addfas</li>
+<li>addfas</li>
+</ol>
+
 
 <p>------------------------------------以下是copy的安装流程----------------------------------
 http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>

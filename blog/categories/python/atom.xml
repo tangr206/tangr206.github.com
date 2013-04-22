@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-21T19:22:34+08:00</updated>
+  <updated>2013-04-22T21:34:43+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python 中有用的函数]]></title>
+    <link href="http://tangr206.github.io/blog/2013/04/22/python-func/"/>
+    <updated>2013-04-22T21:12:00+08:00</updated>
+    <id>http://tangr206.github.io/blog/2013/04/22/python-func</id>
+    <content type="html"><![CDATA[<p><code>python
+</code></p>
+
+<ol>
+<li>lambda
+<code>lambda</code>表达式返回一个函数对象
+例子：
+<code>func = lambda x,y:x+y</code>
+func相当于下面这个函数
+<code>
+def func(x,y):
+ return x+y
+</code>
+注意def是语句而lambda是表达式
+下面这种情况下就只能用lambda而不能用def
+[(lambda x:x*x)(x) for x in range(1,11)]</li>
+</ol>
+
+
+<p>map，reduce，filter中的function都可以用lambda表达式来生成</p>
+
+<ol>
+<li><h2>max max</h2>
+
+```python
+
+<blockquote><blockquote><blockquote><p>A = [("a",23), ("b", 11), ("c", 34)]
+max(A, key=lambda x: x[1])
+max(A, key=oprator.itemgetter(1))
+('c', 34)
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>filter</h2>
+
+filter 函数的功能相当于过滤器。
+调用一个布尔函数bool_func来迭代遍历每个seq中的元素；
+返回一个使bool_seq返回值为true的元素的序列。
+```python filter
+
+<blockquote><blockquote><blockquote><p>A = [("a",23), ("b", 11), ("c", 34)]
+filter(lambda x: x[1]>12, A)
+[('a', 23), ('c', 34)]
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>map</h2>
+
+map函数func作用于给定序列的每个元素，并用一个列表来提供返回值
+```python map
+
+<blockquote><blockquote><blockquote><p>map(lambda x: x[1], A)   #or
+map(operator.itemgetter(1), A)
+[23, 11, 34]
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>reduce</h2>
+
+reduce函数，func为二元函数，将func作用于seq序列的元素，
+<code>每次携带一对（先前的结果以及下一个序列的元素）</code>
+连续的将现有的结果和下一个值作用在获得的随后的结果上，
+最后减少我们的序列为一个单一的返回值。
+```python map
+
+<blockquote><blockquote><blockquote><p>print reduce(lambda x,y:x+y,(1,2,3,4,5,6,7))
+28
+```</p></blockquote></blockquote></blockquote></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Tee]]></title>
@@ -178,7 +250,9 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 
 <pre><code>  "serverB":{ "04-12":[12, 2333, 1232343], "04-15":[34, 35555, 343432], "04-13":[45, 34444, 45454]}, \
   "serverC":{ "04-12":[12, 3333, 1232343], "04-15":[34, 25555, 343432], "04-13":[45, 24444, 45454]}, \
-  "serverD":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 343432], "04-13":[45, 14444, 45454]}, \
+  "serverD":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 243432], "04-13":[45, 14444, 45454]}, \
+  "serverE":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 343432], "04-13":[45, 14444, 45454]}, \
+  "serverF":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 143432], "04-13":[45, 14444, 45454]}, \
   }   
 </code></pre>
 
@@ -189,18 +263,26 @@ D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "0
 <!--more-->
 
 
-<p>如果我们想按照04-15各个server的第二个数值(15555,35555,25555,45555)排序：
-```</p>
+<p>如果我们想按照
+<code>
+04-15日各个server的第二个数值(15555,35555,25555,45555)升序排序，
+相同的话按第三个数值降序排
+</code></p>
 
-<blockquote><blockquote><blockquote><p>res = sorted(D.items(), key=lambda x: x[1]["04-15"][1], reverse=1)
+<p>```python</p>
+
+<blockquote><blockquote><blockquote><p>res = sorted(D.items(), key=lambda x: (x[1]["04-15"][1], -x[1]["04-15"][2]))
 for item in res:
   print item</p>
 
-<p>('serverD', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 343432]})
-('serverB', {'04-13': [45, 34444, 45454], '04-12': [12, 2333, 1232343], '04-15': [34, 35555, 343432]})
+<p>('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
 ('serverC', {'04-13': [45, 24444, 45454], '04-12': [12, 3333, 1232343], '04-15': [34, 25555, 343432]})
-('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
-```</p></blockquote></blockquote></blockquote>
+('serverB', {'04-13': [45, 34444, 45454], '04-12': [12, 2333, 1232343], '04-15': [34, 35555, 343432]})
+('serverE', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 343432]})
+('serverD', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 243432]})
+('serverF', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 143432]})</p></blockquote></blockquote></blockquote>
+
+<p>```</p>
 
 <ul>
 <li><h4>key参数的使用</h4>

@@ -9,7 +9,32 @@
   <meta name="author" content="tom">
 
   
-  <meta name="description" content="部分摘自 Inside Python&#8217;s itertools.tee() WHAT python.iteratools.tee : Return n independent iterators from a single iterable. ">
+  <meta name="description" content="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+``` 0. lambda
+`lambda`表达式返回一个函数对象
+例子：
+`func = lambda x,y:x+y`
+func相当于下面这个函数
+`
+def func(x,y): return x &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +91,137 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/22/python-func/">Python 中有用的函数</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T21:12:00+08:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="sb">``</span><span class="err">`</span>
+</span><span class='line'>
+</span><span class='line'><span class="mf">0.</span> <span class="k">lambda</span>
+</span><span class='line'><span class="sb">`lambda`</span><span class="err">表达式返回一个函数对象</span>
+</span><span class='line'><span class="err">例子：</span>
+</span><span class='line'><span class="sb">`func = lambda x,y:x+y`</span>
+</span><span class='line'><span class="n">func</span><span class="err">相当于下面这个函数</span>
+</span><span class='line'><span class="err">`</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+</span><span class='line'><span class="err">`</span>
+</span><span class='line'><span class="err">注意</span><span class="n">def</span><span class="err">是语句而</span><span class="k">lambda</span><span class="err">是表达式</span>
+</span><span class='line'><span class="err">下面这种情况下就只能用</span><span class="k">lambda</span><span class="err">而不能用</span><span class="k">def</span>
+</span><span class='line'><span class="err">[(</span><span class="nf">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">map</span><span class="err">，</span><span class="nb">reduce</span><span class="err">，</span><span class="nb">filter</span><span class="err">中的</span><span class="n">function</span><span class="err">都可以用</span><span class="k">lambda</span><span class="err">表达式来生成</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="mf">1.</span> <span class="c">##max max</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>python</p>
+
+<blockquote><blockquote><blockquote><p>A = [(&#8220;a&#8221;,23), (&#8220;b&#8221;, 11), (&#8220;c&#8221;, 34)]
+max(A, key=lambda x: x[1])
+max(A, key=oprator.itemgetter(1))
+(&#8216;c&#8217;, 34)</p></blockquote></blockquote></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="mf">2.</span> <span class="c">##filter</span>
+</span><span class='line'><span class="nb">filter</span> <span class="err">函数的功能相当于过滤器。</span>
+</span><span class='line'><span class="err">调用一个布尔函数</span><span class="n">bool_func</span><span class="err">来迭代遍历每个</span><span class="n">seq</span><span class="err">中的元素；</span>
+</span><span class='line'><span class="err">返回一个使</span><span class="n">bool_seq</span><span class="err">返回值为</span><span class="n">true</span><span class="err">的元素的序列。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>python filter</p>
+
+<blockquote><blockquote><blockquote><p>A = [(&#8220;a&#8221;,23), (&#8220;b&#8221;, 11), (&#8220;c&#8221;, 34)]
+filter(lambda x: x[1]>12, A)
+[(&#8216;a&#8217;, 23), (&#8216;c&#8217;, 34)]</p></blockquote></blockquote></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="mf">2.</span> <span class="c">##map</span>
+</span><span class='line'><span class="nb">map</span><span class="err">函数</span><span class="n">func</span><span class="err">作用于给定序列的每个元素，并用一个列表来提供返回值</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>python map</p>
+
+<blockquote><blockquote><blockquote><p>map(lambda x: x[1], A)   #or
+map(operator.itemgetter(1), A)
+[23, 11, 34]</p></blockquote></blockquote></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="mf">3.</span> <span class="c">##reduce</span>
+</span><span class='line'><span class="nb">reduce</span><span class="err">函数，</span><span class="n">func</span><span class="err">为二元函数，将</span><span class="n">func</span><span class="err">作用于</span><span class="n">seq</span><span class="err">序列的元素，</span>
+</span><span class='line'><span class="sb">`每次携带一对（先前的结果以及下一个序列的元素）`</span>
+</span><span class='line'><span class="err">连续的将现有的结果和下一个值作用在获得的随后的结果上，</span>
+</span><span class='line'><span class="err">最后减少我们的序列为一个单一的返回值。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>python map</p>
+
+<blockquote><blockquote><blockquote><p>print reduce(lambda x,y:x+y,(1,2,3,4,5,6,7))
+28
+&#8220;`</p></blockquote></blockquote></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -206,10 +362,14 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span> <span class="o">=</span> <span class="p">{</span>   <span class="s">&quot;serverA&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">15555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">44444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span>  \
 </span><span class='line'>        <span class="s">&quot;serverB&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">35555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">34444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
 </span><span class='line'>        <span class="s">&quot;serverC&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">25555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">24444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
-</span><span class='line'>        <span class="s">&quot;serverD&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
+</span><span class='line'>        <span class="s">&quot;serverD&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">243432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
+</span><span class='line'>        <span class="s">&quot;serverE&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">343432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
+</span><span class='line'>        <span class="s">&quot;serverF&quot;</span><span class="p">:{</span> <span class="s">&quot;04-12&quot;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4333</span><span class="p">,</span> <span class="mi">1232343</span><span class="p">],</span> <span class="s">&quot;04-15&quot;</span><span class="p">:[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">45555</span><span class="p">,</span> <span class="mi">143432</span><span class="p">],</span> <span class="s">&quot;04-13&quot;</span><span class="p">:[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">14444</span><span class="p">,</span> <span class="mi">45454</span><span class="p">]},</span> \
 </span><span class='line'>        <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -375,15 +535,19 @@ http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/python/'>python (2)</a></li><li><a href='/blog/categories/shell/'>shell (1)</a></li><li><a href='/blog/categories/tools/'>tools (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/python/'>python (3)</a></li><li><a href='/blog/categories/shell/'>shell (1)</a></li><li><a href='/blog/categories/tools/'>tools (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/python-itemgetter' style='font-size: 160.0%'>python.itemgetter(1)</a> <a href='/blog/categories/python-iterator' style='font-size: 160.0%'>python.iterator(1)</a> <a href='/blog/categories/python-tee' style='font-size: 160.0%'>python.tee(1)</a> <a href='/blog/categories/pyton-sort' style='font-size: 160.0%'>pyton.sort(1)</a> <a href='/blog/categories/pyton-yield' style='font-size: 160.0%'>pyton.yield(1)</a> <a href='/blog/categories/shell-find' style='font-size: 160.0%'>shell.find(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/python-itemgetter' style='font-size: 160.0%'>python.itemgetter(1)</a> <a href='/blog/categories/python-iterator' style='font-size: 160.0%'>python.iterator(1)</a> <a href='/blog/categories/python-max' style='font-size: 160.0%'>python.max(1)</a> <a href='/blog/categories/python-tee' style='font-size: 160.0%'>python.tee(1)</a> <a href='/blog/categories/pyton-sort' style='font-size: 160.0%'>pyton.sort(1)</a> <a href='/blog/categories/pyton-yield' style='font-size: 160.0%'>pyton.yield(1)</a> <a href='/blog/categories/shell-find' style='font-size: 160.0%'>shell.find(1)</a> </span>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/22/python-func/">Python 中有用的函数</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/04/21/python-tee/">Python Tee</a>
@@ -399,10 +563,6 @@ http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>
     
       <li class="post">
         <a href="/blog/2013/04/18/usefull-git-and-rake-commands/">usefull git &amp; rake commands</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/18/hi-octopress/">OctoPress. 安装使用中的坑</a>
       </li>
     
   </ul>

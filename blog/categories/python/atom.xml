@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-22T21:39:03+08:00</updated>
+  <updated>2013-04-22T21:40:16+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -18,22 +18,17 @@
     <link href="http://tangr206.github.io/blog/2013/04/22/python-func/"/>
     <updated>2013-04-22T21:12:00+08:00</updated>
     <id>http://tangr206.github.io/blog/2013/04/22/python-func</id>
-    <content type="html"><![CDATA[<p><code>python
-</code></p>
-
-<ol>
+    <content type="html"><![CDATA[<ol>
 <li>lambda
 <code>lambda</code>表达式返回一个函数对象
 例子：
 <code>func = lambda x,y:x+y</code>
 func相当于下面这个函数
-<code>
 def func(x,y):
  return x+y
-</code>
 注意def是语句而lambda是表达式
 下面这种情况下就只能用lambda而不能用def
-[(lambda x:x*x)(x) for x in range(1,11)]</li>
+<code>[(lambda x:x*x)(x) for x in range(1,11)]</code></li>
 </ol>
 
 

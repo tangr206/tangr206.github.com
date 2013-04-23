@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-22T21:40:16+08:00</updated>
+  <updated>2013-04-23T11:35:44+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -75,8 +75,53 @@ reduce函数，func为二元函数，将func作用于seq序列的元素，
 <blockquote><blockquote><blockquote><p>print reduce(lambda x,y:x+y,(1,2,3,4,5,6,7))
 28
 ```</p></blockquote></blockquote></blockquote></li>
+<li><h2>itertools.cycle(iterable)</h2>
+
+Make an iterator returning elements from the iterable and saving a copy of each.
+When the iterable is exhausted, return elements from the saved copy.
+Repeats indefinitely. Equivalent to:
+```python
+def cycle(iterable):
+ # cycle('ABCD') --> A B C D A B C D A B C D ...
+ saved = []
+ for element in iterable:
+
+<pre><code> yield element
+ saved.append(element)
+</code></pre>
+
+ while saved:
+
+<pre><code> for element in saved:
+       yield element
+</code></pre>
+
+<p><code>``
+注意：因为cycle缓存了中间结果，如果iterable很长的话...
+</code>Note, this member of the toolkit may require significant auxiliary storage (depending on the length of the iterable).`</p></li>
+<li><h2>itertools.repeat()</h2>
+
+<p>python的heapq.py模块中有这样一个用法：
+<code>return map(heappop, repeat(h, min(n, len(h)))) #返回n个h（heappop n次）</code>
+其中heappop弹出headp的堆顶，并维护堆结构</p></li>
 </ol>
 
+
+<p><a href="http://stackoverflow.com/questions/9059173/what-is-the-purpose-in-pythons-itertools-repeat">stack overflow</a>
+The itertools.repeat function is lazy; it only uses the memory required for one item.
+On the other hand, the (a)<em>n and [a]</em>n idioms _ create n copies of the object in memory_.
+For five items, the multiplication idiom is probably better,
+but you might notice a resource problem if you had to repeat something, say, a million times.</p>
+
+<p>Minor quibble: [a]<em>n does not create n copies of a in memory.
+<strong> It creates n references to a single copy of a </strong>.
+In some cases the difference can be quite significant; try a = [[]]</em>5; a[0].append(1). – Thomas K Jan 30 '12 at 12:49</p>
+
+<p>Good point. I keep forgetting that almost <strong> everything in Python is a reference </strong>.<br/>
+I guess that also abates the memory usage problem somewhat,
+but I'd guess a million references still has a nontrivial resource requirement. – mlefavor Jan 30 '12 at 15:22</p>
+
+<p>Yep, it would still have to <strong> allocate an array of n pointers. </strong> – Thomas K Jan 30 '12 at 19:42</p>
 ]]></content>
   </entry>
   

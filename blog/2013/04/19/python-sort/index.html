@@ -9,14 +9,9 @@
   <meta name="author" content="tom">
 
   
-  <meta name="description" content="字典排序入门, : 解释为什么python中的字典不提供sort函数 Python中最快的字典排序方法 : 简单的说, 用itemgetter比lambda快, iteritems比其他快 复杂结构指定Key排序 先看一个例子： 1
+  <meta name="description" content="字典排序入门, : 解释为什么python中的字典不提供sort函数 Python中最快的字典排序方法 : 简单的说, 用itemgetter比lambda快, iteritems比其他快 Schwartzian Transform(施瓦茨变换) 复杂结构指定Key排序 先看一个例子： 1
 2
-3
-4
-5
-6
-7
-D = { &quot;serverA& &hellip;">
+3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +97,8 @@ D = { &quot;serverA& &hellip;">
 <div class="entry-content"><p><a href="http://www.python.org/dev/peps/pep-0265/">字典排序入门,</a> : 解释为什么python中的字典不提供sort函数</p>
 
 <p><a href="http://zuroc.42qu.com/10492195">Python中最快的字典排序方法</a> : 简单的说, 用itemgetter比lambda快, iteritems比其他快</p>
+
+<p><a href="http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python">Schwartzian Transform(施瓦茨变换)</a></p>
 
 <ul>
 <li><h4>复杂结构指定Key排序</h4>
@@ -248,6 +245,23 @@ D = { &quot;serverA& &hellip;">
 
 
 <p><a href="http://docs.python.org/2/howto/sorting.html">参考</a></p>
+
+<p>http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python</p>
+
+<p>The technique, attributed to Randal Schwartz of the Perl community, sorts the elements of a list by a metric which maps each element to its “sort value”. In Python, just use the key argument for the sort() method:</p>
+
+<p>Isorted = L[:]
+Isorted.sort(key=lambda s: int(s[10:15]))
+The key argument is new in Python 2.4, for older versions this kind of sorting is quite simple to do with list comprehensions. To sort a list of strings by their uppercase values:</p>
+
+<p>tmp1 = [(x.upper(), x) for x in L]  # Schwartzian transform
+tmp1.sort()
+Usorted = [x[1] for x in tmp1]
+To sort by the integer value of a subfield extending from positions 10-15 in each string:</p>
+
+<p>tmp2 = [(int(s[10:15]), s) for s in L]  # Schwartzian transform
+tmp2.sort()
+Isorted = [x[1] for x in tmp2]</p>
 </div>
 
 
@@ -306,15 +320,19 @@ D = { &quot;serverA& &hellip;">
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/python/'>python (3)</a></li><li><a href='/blog/categories/shell/'>shell (1)</a></li><li><a href='/blog/categories/tools/'>tools (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/python/'>python (4)</a></li><li><a href='/blog/categories/shell/'>shell (1)</a></li><li><a href='/blog/categories/tools/'>tools (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/python-itemgetter' style='font-size: 130.0%'>python.itemgetter(1)</a> <a href='/blog/categories/python-iteratools' style='font-size: 130.0%'>python.iteratools(1)</a> <a href='/blog/categories/python-iterator' style='font-size: 130.0%'>python.iterator(1)</a> <a href='/blog/categories/python-join' style='font-size: 130.0%'>python.join(1)</a> <a href='/blog/categories/python-lambda' style='font-size: 130.0%'>python.lambda(1)</a> <a href='/blog/categories/python-map' style='font-size: 130.0%'>python.map(1)</a> <a href='/blog/categories/python-max' style='font-size: 130.0%'>python.max(1)</a> <a href='/blog/categories/python-reduce' style='font-size: 130.0%'>python.reduce(1)</a> <a href='/blog/categories/python-sort' style='font-size: 130.0%'>python.sort(1)</a> <a href='/blog/categories/python-tee' style='font-size: 130.0%'>python.tee(1)</a> <a href='/blog/categories/python-yield' style='font-size: 160.0%'>python.yield(2)</a> <a href='/blog/categories/shell-find' style='font-size: 130.0%'>shell.find(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/python-effecive' style='font-size: 130.0%'>python.effecive(1)</a> <a href='/blog/categories/python-itemgetter' style='font-size: 130.0%'>python.itemgetter(1)</a> <a href='/blog/categories/python-iteratools' style='font-size: 130.0%'>python.iteratools(1)</a> <a href='/blog/categories/python-iterator' style='font-size: 130.0%'>python.iterator(1)</a> <a href='/blog/categories/python-join' style='font-size: 130.0%'>python.join(1)</a> <a href='/blog/categories/python-lambda' style='font-size: 130.0%'>python.lambda(1)</a> <a href='/blog/categories/python-map' style='font-size: 130.0%'>python.map(1)</a> <a href='/blog/categories/python-max' style='font-size: 130.0%'>python.max(1)</a> <a href='/blog/categories/python-reduce' style='font-size: 130.0%'>python.reduce(1)</a> <a href='/blog/categories/python-sort' style='font-size: 130.0%'>python.sort(1)</a> <a href='/blog/categories/python-tee' style='font-size: 130.0%'>python.tee(1)</a> <a href='/blog/categories/python-yield' style='font-size: 160.0%'>python.yield(2)</a> <a href='/blog/categories/shell-find' style='font-size: 130.0%'>shell.find(1)</a> </span>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/python-performance-tips/">Python Performance Tips</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/04/22/python-func/">Python 中有用的函数</a>
@@ -330,10 +348,6 @@ D = { &quot;serverA& &hellip;">
     
       <li class="post">
         <a href="/blog/2013/04/19/python-sort/">Python 排序</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/18/usefull-git-and-rake-commands/">usefull git &amp; rake commands</a>
       </li>
     
   </ul>

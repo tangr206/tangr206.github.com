@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | tangr206's Blog]]></title>
   <link href="http://tangr206.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tangr206.github.io/"/>
-  <updated>2013-04-25T16:27:26+08:00</updated>
+  <updated>2013-04-25T21:12:40+08:00</updated>
   <id>http://tangr206.github.io/</id>
   <author>
     <name><![CDATA[tom]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Performance Tips]]></title>
+    <link href="http://tangr206.github.io/blog/2013/04/25/python-performance-tips/"/>
+    <updated>2013-04-25T19:56:00+08:00</updated>
+    <id>http://tangr206.github.io/blog/2013/04/25/python-performance-tips</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.monitis.com/index.php/2012/02/13/python-performance-tips-part-1/">Here are the tips to help you become a better Python developer</a></p>
+
+<ol>
+<li><h3>Use join() to glue a large number of strings:</h3>
+
+<p>大量字符串拼接使用join (还可以用来讲list等iterator转为str)
+You can use “+” to combine several strings. Since string is immutable in Python, every “+” operation involves creating a new string and copying the old content. A frequent idiom is to use Python’s array module to modify individual characters; when you are done, use the <code>join()</code> function to re-create your final string.</p></li>
+</ol>
+
+
+<blockquote><blockquote><blockquote><h1>This is good to glue a large number of strings</h1>
+
+<p>for chunk in input():
+   mystring.join(chunk)</p></blockquote></blockquote></blockquote>
+
+<ol>
+<li><h3>Use Python multiple assignment to swap variables:</h3>
+
+<code>This is elegant and faster in Python:</code>
+
+<blockquote><blockquote><blockquote><p>x, y = y, x
+This is slower:
+temp = x
+x = y
+y = temp</p></blockquote></blockquote></blockquote></li>
+<li><h3>Speed up by lazy importing:</h3>
+
+<p>if some modules are not needed right away, import them later.</p></li>
+<li><h3>Use “while 1″ for the infinite loop:（pyhton3.x中和while true效率一样）</h3>
+
+<p>“while 1″ is a single jump operation.（python2.x）
+<a href="http://stackoverflow.com/questions/3815359/while-1-vs-for-whiletrue-why-is-there-a-difference">因为</a>
+True是 built-in global constant ，所以解释器需要多一步to load the contents of True。
+并且True是可以重新复制的(3以下版本)</p></li>
+<li><h3>Use list comprehension</h3>
+
+<blockquote><blockquote><blockquote><h1>the good way to iterate a range</h1>
+
+<p>evens = [ i for i in range(10) if i%2 == 0]
+[0, 2, 4, 6, 8]
+解释器有机会做优化， 更易读， 节省变量</p></blockquote></blockquote></blockquote></li>
+<li><h3>Learn bisect module for keeping a list in sorted order</h3></li>
+<li><h3>Use Python generator to get value on demand:</h3>
+
+<a href="http://tangr206.github.io/blog/2013/04/21/python-tee/">gengerator</a>
+在需要的时候才返回对应的值
+```python
+
+<blockquote><blockquote><blockquote><p>chunk = ( 1000 * i for i in xrange(1000))
+chunk
+<generator object <genexpr> at 0x7f65d90dcaa0>
+chunk.next()
+0
+chunk.next()
+1000
+chunk.next()
+2000
+```</p></blockquote></blockquote></blockquote></li>
+<li><h3>Understand that a Python list, is actually an array</h3>
+
+<p>python  中的List就是数组，插入和删除的效率需要我们仔细斟酌</p></li>
+<li><h3>map和set是用hash实现的，效率不错</h3></li>
+<li><h2>Use sort() with Schwartzian Transform</h2>
+
+<p>复杂的结构排序如果用list.sort(cmp())比较慢，因为有多次函数调用</p></li>
+</ol>
+
+
+<p> <a href="http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python">Schwartzian Transform</a>
+<code>I want to do a complicated sort: can you do a Schwartzian Transform in Python?</code>
+The technique, attributed to Randal Schwartz of the Perl community, sorts the elements of a list by a metric which maps each element to its “sort value”. In Python, just use the key argument for the sort() method:
+<code>python
+Isorted = L[:]
+Isorted.sort(key=lambda s: int(s[10:15]))
+</code>
+The key argument is new in Python 2.4, for * older versions * this kind of sorting is quite simple to do with list comprehensions. To sort a list of strings by their uppercase values:</p>
+
+<p>tmp1 = [(x.upper(), x) for x in L]  # Schwartzian transform
+tmp1.sort()
+Usorted = [x[1] for x in tmp1]
+To sort by the integer value of a subfield extending from positions 10-15 in each string:</p>
+
+<p>tmp2 = [(int(s[10:15]), s) for s in L]  # Schwartzian transform
+tmp2.sort()
+Isorted = [x[1] for x in tmp2]</p>
+
+<ol>
+<li><h3>Cache results with Python decorator:</h3>
+
+The symbol “@” is Python decorator syntax. Use it not only for tracing, locking or logging. You can decorate a Python function so that it remembers the results needed later. This technique is called memoization. Here is an example:
+
+<blockquote><blockquote><blockquote><p>from functools import wraps
+def memo(f):
+   cache = { }
+   @wraps(f)
+   def  wrap(*arg):</p>
+
+<pre><code>   if arg not in cache: cache['arg'] = f(*arg)
+   return cache['arg']
+</code></pre>
+
+<p>   return wrap
+And we can use this decorator on a Fibonacci function:
+@memo
+def fib(i):
+   if i &lt; 2: return 1
+   return fib(i-1) + fib(i-2)
+The key idea here is simple: enhance (decorate) your function to remember each Fibonacci term you’ve calculated; if they are in the cache, no need to calculate it again.</p></blockquote></blockquote></blockquote></li>
+<li><h3>Understand Python GIL(global interpreter lock):</h3>
+
+<p>GIL is necessary because CPython’s memory management is not thread-safe. You can’t simply create multiple threads and hope Python will run faster on a multi-core machine. It is because GIL will prevents multiple native threads from executing Python bytecodes at once. In other words, GIL will serialize all your threads. You can, however, speed up your program by using threads to manage several forked processes, which are running independently outside your Python code.</p></li>
+<li><h2>#</h2></li>
+<li><h2>#</h2></li>
+<li><h2>#</h2></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python 中有用的函数]]></title>
@@ -151,6 +275,18 @@ but I'd guess a million references still has a nontrivial resource requirement. 
  |      iterable.  The separator between elements is S.</p>
 
 <p>用array有<a href="http://www.python.org/doc/essays/list2str.html">更快</a>的表现</p>
+
+<ol>
+<li><h2><a href="http://woodpecker.org.cn/diveintopython/native_data_types/tuples.html">tuple</a></h2>
+
+<p>使用 tuple 有什么好处呢？</p></li>
+</ol>
+
+
+<p>Tuple 比 list 操作速度快。如果您定义了一个值的常量集，并且唯一要用它做的是不断地遍历它，请使用 tuple 代替 list。
+如果对不需要修改的数据进行 “写保护”，可以使代码更安全。使用 tuple 而不是 list 如同拥有一个隐含的 assert 语句，说明这一数据是常量。如果必须要改变这些值，则需要执行 tuple 到 list 的转换 (需要使用一个特殊的函数)。
+还记得我说过 dictionary keys 可以是字符串，整数和 “其它几种类型”吗？Tuples 就是这些类型之一。Tuples 可以在 dictionary 中被用做 key，但是 list 不行。实际上，事情要比这更复杂。Dictionary key 必须是不可变的。Tuple 本身是不可改变的，但是如果您有一个 list 的 tuple，那就认为是可变的了，用做 dictionary key 就是不安全的。只有字符串、整数或其它对 dictionary 安全的 tuple 才可以用作 dictionary key。
+Tuples 可以用在字符串格式化中，我们会很快看到。</p>
 ]]></content>
   </entry>
   
@@ -310,6 +446,8 @@ def tee(iterable, n=2):
 
 <p><a href="http://zuroc.42qu.com/10492195">Python中最快的字典排序方法</a> : 简单的说, 用itemgetter比lambda快, iteritems比其他快</p>
 
+<p><a href="http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python">Schwartzian Transform(施瓦茨变换)</a></p>
+
 <ul>
 <li><h4>复杂结构指定Key排序</h4>
 
@@ -421,6 +559,23 @@ operator中还有其它常用的函数，他们都是用c实现的，在效率�
 
 
 <p><a href="http://docs.python.org/2/howto/sorting.html">参考</a></p>
+
+<p>http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python</p>
+
+<p>The technique, attributed to Randal Schwartz of the Perl community, sorts the elements of a list by a metric which maps each element to its “sort value”. In Python, just use the key argument for the sort() method:</p>
+
+<p>Isorted = L[:]
+Isorted.sort(key=lambda s: int(s[10:15]))
+The key argument is new in Python 2.4, for older versions this kind of sorting is quite simple to do with list comprehensions. To sort a list of strings by their uppercase values:</p>
+
+<p>tmp1 = [(x.upper(), x) for x in L]  # Schwartzian transform
+tmp1.sort()
+Usorted = [x[1] for x in tmp1]
+To sort by the integer value of a subfield extending from positions 10-15 in each string:</p>
+
+<p>tmp2 = [(int(s[10:15]), s) for s in L]  # Schwartzian transform
+tmp2.sort()
+Isorted = [x[1] for x in tmp2]</p>
 ]]></content>
   </entry>
   

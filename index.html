@@ -9,8 +9,7 @@
   <meta name="author" content="tom">
 
   
-  <meta name="description" content="lambda
-lambda表达式返回一个函数对象
+  <meta name="description" content="lambda lambda表达式返回一个函数对象
 例子：
 func = lambda x,y:x+y
 func相当于下面这个函数
@@ -104,8 +103,9 @@ def func(x,y): return x+y
 
 
   <div class="entry-content"><ol>
-<li>lambda
-<code>lambda</code>表达式返回一个函数对象
+<li><h2>lambda</h2>
+
+<p><code>lambda</code>表达式返回一个函数对象
 例子：
 <code>func = lambda x,y:x+y</code>
 func相当于下面这个函数
@@ -113,14 +113,14 @@ def func(x,y):
  return x+y
 注意def是语句而lambda是表达式
 下面这种情况下就只能用lambda而不能用def
-<code>[(lambda x:x*x)(x) for x in range(1,11)]</code></li>
+<code>[(lambda x:x*x)(x) for x in range(1,11)]</code></p></li>
 </ol>
 
 
 <p>map，reduce，filter中的function都可以用lambda表达式来生成</p>
 
 <ol>
-<li><h2>max max</h2></li>
+<li><h2>max</h2></li>
 </ol>
 
 
@@ -163,9 +163,15 @@ def func(x,y):
 <figure class='code'><figcaption><span>map</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">)</span>   <span class="c">#or</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="mi">23</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="mi">34</span><span class="p">)]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">)</span>   <span class="c">#or</span>
 </span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">A</span><span class="p">)</span>
 </span><span class='line'><span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">34</span><span class="p">]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">243</span><span class="p">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -230,19 +236,44 @@ Repeats indefinitely. Equivalent to:</p></li>
 
 <p><a href="http://stackoverflow.com/questions/9059173/what-is-the-purpose-in-pythons-itertools-repeat">stack overflow</a>
 The itertools.repeat function is lazy; it only uses the memory required for one item.
-On the other hand, the (a)<em>n and [a]</em>n idioms _ create n copies of the object in memory_.
+On the other hand, the (a)*n and [a]*n idioms _ create n copies of the object in memory_.
 For five items, the multiplication idiom is probably better,
 but you might notice a resource problem if you had to repeat something, say, a million times.</p>
 
-<p>Minor quibble: [a]<em>n does not create n copies of a in memory.
+<p>Minor quibble: [a]*n does not create n copies of a in memory.
 <strong> It creates n references to a single copy of a </strong>.
-In some cases the difference can be quite significant; try a = [[]]</em>5; a[0].append(1). – Thomas K Jan 30 &#8216;12 at 12:49</p>
+In some cases the difference can be quite significant; try a = [[]]*5; a[0].append(1). – Thomas K Jan 30 &#8216;12 at 12:49</p>
 
 <p>Good point. I keep forgetting that almost <strong> everything in Python is a reference </strong>.<br/>
 I guess that also abates the memory usage problem somewhat,
 but I&#8217;d guess a million references still has a nontrivial resource requirement. – mlefavor Jan 30 &#8216;12 at 15:22</p>
 
 <p>Yep, it would still have to <strong> allocate an array of n pointers. </strong> – Thomas K Jan 30 &#8216;12 at 19:42</p>
+
+<ol>
+<li><h2>str.join()</h2>
+
+<p>可以用来将list快速转为str</p></li>
+</ol>
+
+
+<p>并且因为python中字符川都是常量(字符串创建后是只读的)，所以<strong> 大量字符 </strong>用+来链接字符串会不停地
+产生中间字符串，浪费内存
+<code>s = "aaa" + "aaa" + "aaa" + "aaa" + "aaa" + "aaa"</code>
+可以用join替代：
+<code>"".join("aaa","aaa","aaa","aaa","aaa","aaa","aaa","aaa","aaa","aaa",)</code></p>
+
+<p><a href="http://www.douban.com/group/topic/12795262/">引用</a>
+<code>python字符串相加效率并不比join低，相反效率更高。但每个加号都创造额外字符串，10个字符串相加就会再创造出9个字符串，但我们只要1个，所以用join，节约内存，而不是节约cpu</code>
+<code>python cookbook第一章有讲过,字符串对象是immutable，任何对字符串的操作都将创建一个新的字符串对象，而不是改变原来的对象.因此N个字符串相加必将丢弃中间N-1个结果, 只是两个字符串相加，效果不是很明显</code></p>
+
+<p> |  join(&#8230;)
+ |      S.join(iterable) -> string
+ |    <br/>
+ |      Return a string which is the concatenation of the strings in the
+ |      iterable.  The separator between elements is S.</p>
+
+<p>用array有<a href="http://www.python.org/doc/essays/list2str.html">更快</a>的表现</p>
 </div>
   
   
@@ -566,7 +597,7 @@ http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/python-itemgetter' style='font-size: 160.0%'>python.itemgetter(1)</a> <a href='/blog/categories/python-iteratools' style='font-size: 160.0%'>python.iteratools(1)</a> <a href='/blog/categories/python-iterator' style='font-size: 160.0%'>python.iterator(1)</a> <a href='/blog/categories/python-lambda' style='font-size: 160.0%'>python.lambda(1)</a> <a href='/blog/categories/python-map' style='font-size: 160.0%'>python.map(1)</a> <a href='/blog/categories/python-max' style='font-size: 160.0%'>python.max(1)</a> <a href='/blog/categories/python-reduce' style='font-size: 160.0%'>python.reduce(1)</a> <a href='/blog/categories/python-tee' style='font-size: 160.0%'>python.tee(1)</a> <a href='/blog/categories/python-yield' style='font-size: 160.0%'>python.yield(1)</a> <a href='/blog/categories/pyton-sort' style='font-size: 160.0%'>pyton.sort(1)</a> <a href='/blog/categories/pyton-yield' style='font-size: 160.0%'>pyton.yield(1)</a> <a href='/blog/categories/shell-find' style='font-size: 160.0%'>shell.find(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/python-itemgetter' style='font-size: 130.0%'>python.itemgetter(1)</a> <a href='/blog/categories/python-iteratools' style='font-size: 130.0%'>python.iteratools(1)</a> <a href='/blog/categories/python-iterator' style='font-size: 130.0%'>python.iterator(1)</a> <a href='/blog/categories/python-join' style='font-size: 130.0%'>python.join(1)</a> <a href='/blog/categories/python-lambda' style='font-size: 130.0%'>python.lambda(1)</a> <a href='/blog/categories/python-map' style='font-size: 130.0%'>python.map(1)</a> <a href='/blog/categories/python-max' style='font-size: 130.0%'>python.max(1)</a> <a href='/blog/categories/python-reduce' style='font-size: 130.0%'>python.reduce(1)</a> <a href='/blog/categories/python-sort' style='font-size: 130.0%'>python.sort(1)</a> <a href='/blog/categories/python-tee' style='font-size: 130.0%'>python.tee(1)</a> <a href='/blog/categories/python-yield' style='font-size: 160.0%'>python.yield(2)</a> <a href='/blog/categories/shell-find' style='font-size: 130.0%'>shell.find(1)</a> </span>
 </section>
 <section>
   <h1>Recent Posts</h1>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: python.itemgetter | tangr206's Blog]]></title>
+  <link href="http://tangr206.github.io/blog/tags/python-itemgetter/atom.xml" rel="self"/>
+  <link href="http://tangr206.github.io/"/>
+  <updated>2013-04-25T21:42:01+08:00</updated>
+  <id>http://tangr206.github.io/</id>
+  <author>
+    <name><![CDATA[tom]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python 排序]]></title>
+    <link href="http://tangr206.github.io/blog/2013/04/19/python-sort/"/>
+    <updated>2013-04-19T17:49:00+08:00</updated>
+    <id>http://tangr206.github.io/blog/2013/04/19/python-sort</id>
+    <content type="html"><![CDATA[<p><a href="http://www.python.org/dev/peps/pep-0265/">字典排序入门,</a> : 解释为什么python中的字典不提供sort函数</p>
+
+<p><a href="http://zuroc.42qu.com/10492195">Python中最快的字典排序方法</a> : 简单的说, 用itemgetter比lambda快, iteritems比其他快</p>
+
+<p><a href="http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python">Schwartzian Transform(施瓦茨变换)</a></p>
+
+<ul>
+<li><h4>复杂结构指定Key排序</h4>
+
+先看一个例子：
+```python
+D = {   "serverA":{ "04-12":[12, 1333, 1232343], "04-15":[34, 15555, 343432], "04-13":[45, 44444, 45454]},  \
+
+<pre><code>  "serverB":{ "04-12":[12, 2333, 1232343], "04-15":[34, 35555, 343432], "04-13":[45, 34444, 45454]}, \
+  "serverC":{ "04-12":[12, 3333, 1232343], "04-15":[34, 25555, 343432], "04-13":[45, 24444, 45454]}, \
+  "serverD":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 243432], "04-13":[45, 14444, 45454]}, \
+  "serverE":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 343432], "04-13":[45, 14444, 45454]}, \
+  "serverF":{ "04-12":[12, 4333, 1232343], "04-15":[34, 45555, 143432], "04-13":[45, 14444, 45454]}, \
+  }   
+</code></pre>
+
+<p>```</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<p>如果我们想按照
+<code>
+04-15日各个server的第二个数值(15555,35555,25555,45555)升序排序，
+相同的话按第三个数值降序排
+</code></p>
+
+<p>```python</p>
+
+<blockquote><blockquote><blockquote><p>res = sorted(D.items(), key=lambda x: (x[1]["04-15"][1], -x[1]["04-15"][2]))
+for item in res:
+  print item</p>
+
+<p>('serverA', {'04-13': [45, 44444, 45454], '04-12': [12, 1333, 1232343], '04-15': [34, 15555, 343432]})
+('serverC', {'04-13': [45, 24444, 45454], '04-12': [12, 3333, 1232343], '04-15': [34, 25555, 343432]})
+('serverB', {'04-13': [45, 34444, 45454], '04-12': [12, 2333, 1232343], '04-15': [34, 35555, 343432]})
+('serverE', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 343432]})
+('serverD', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 243432]})
+('serverF', {'04-13': [45, 14444, 45454], '04-12': [12, 4333, 1232343], '04-15': [34, 45555, 143432]})</p></blockquote></blockquote></blockquote>
+
+<p>```</p>
+
+<ul>
+<li><h4>key参数的使用</h4>
+
+key参数指定一个函数，这个函数的 <strong> 实参为每个迭代器的item </strong>，经过该函数运算，<strong>返回值为每个item中需要进行对比的项（key）</strong>
+简单说，key参数值必须是一个函数，且这个函数只有一个参数，并且返回一个key值，作为比较使用。
+如下实例：
+```
+
+<blockquote><blockquote><blockquote><p>sorted("This is a test string from Andrew".split(), key=str.lower)
+['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']
+```</p></blockquote></blockquote></blockquote></li>
+<li><h4>使用Operator模块</h4></li>
+</ul>
+
+
+<p>由于以上使用key参数的方式十分普遍，python提供了相关函数，使以上方式的使用更加简单快捷。</p>
+
+<p>operator模块提供了 <strong>operator.itemgetter(),operator.attrgetter()</strong>函数，
+在 Python 2.5以后还提供了operator.methodcaller() 函数。
+使用这些函数可以让上节描述的排序方法更加快捷方便：
+```</p>
+
+<h1>Modules/operator.c</h1>
+
+<h1>itemgetter</h1>
+
+<h1>Return a callable object that fetches the given item(s) from its operand.\n\</h1>
+
+<h1>After, f=itemgetter(2), the call f(r) returns r[2].\n\</h1>
+
+<h1>After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])");</h1>
+
+<blockquote><blockquote><blockquote><p>a = [1,2,3] <br/>
+b=operator.itemgetter(1) <br/>
+b(a) <br/>
+2
+student_tuples = [</p>
+
+<pre><code>('john', 'A', 15),
+('jane', 'B', 12),
+('dave', 'B', 10),
+</code></pre>
+
+<p>]
+sorted(student_tuples, key=lambda student: student[2])   # sort by age
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p>
+
+<p>from operator import itemgetter, attrgetter
+sorted(student_tuples, key=itemgetter(2))
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p>
+
+<p>sorted(student_objects, key=attrgetter('age'))
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p></blockquote></blockquote></blockquote>
+
+<p>```
+operator中还有其它常用的函数，他们都是用c实现的，在效率上有很大的优势，
+所以如果很关心 <strong> sort效率 </strong> ，可以考虑在sorted中使用itemgetter.
+<a href="http://www.ibm.com/developerworks/cn/cloud/library/cl-bigdata/">比如MapReduce中大量使用字典排序</a></p>
+
+<ul>
+<li><h4><code>list.sort()</code> 与<code>sorted()</code> 区别</h4>
+
+<p>++ 第一,<code>list.sort()</code>没有返回值，只对list原地排序；而<code>sorted()</code>将排序后序列作为新list返回
+++ 第二，<code>list.sort()</code>只应用于list，而<code>sorted()</code>可用于任意迭代器</p></li>
+</ul>
+
+
+<p><a href="http://docs.python.org/2/howto/sorting.html">参考</a></p>
+
+<p>http://docs.python.org/2/faq/programming.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python</p>
+
+<p>The technique, attributed to Randal Schwartz of the Perl community, sorts the elements of a list by a metric which maps each element to its “sort value”. In Python, just use the key argument for the sort() method:</p>
+
+<p>Isorted = L[:]
+Isorted.sort(key=lambda s: int(s[10:15]))
+The key argument is new in Python 2.4, for older versions this kind of sorting is quite simple to do with list comprehensions. To sort a list of strings by their uppercase values:</p>
+
+<p>tmp1 = [(x.upper(), x) for x in L]  # Schwartzian transform
+tmp1.sort()
+Usorted = [x[1] for x in tmp1]
+To sort by the integer value of a subfield extending from positions 10-15 in each string:</p>
+
+<p>tmp2 = [(int(s[10:15]), s) for s in L]  # Schwartzian transform
+tmp2.sort()
+Isorted = [x[1] for x in tmp2]</p>
+]]></content>
+  </entry>
+  
+</feed>

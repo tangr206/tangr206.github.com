@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: python.lambda | tangr206's Blog]]></title>
+  <link href="http://tangr206.github.io/blog/tags/python-lambda/atom.xml" rel="self"/>
+  <link href="http://tangr206.github.io/"/>
+  <updated>2013-04-25T21:42:01+08:00</updated>
+  <id>http://tangr206.github.io/</id>
+  <author>
+    <name><![CDATA[tom]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python 中有用的函数]]></title>
+    <link href="http://tangr206.github.io/blog/2013/04/22/python-func/"/>
+    <updated>2013-04-22T21:12:00+08:00</updated>
+    <id>http://tangr206.github.io/blog/2013/04/22/python-func</id>
+    <content type="html"><![CDATA[<ol>
+<li><h2>lambda</h2>
+
+<p><code>lambda</code>表达式返回一个函数对象
+例子：
+<code>func = lambda x,y:x+y</code>
+func相当于下面这个函数
+def func(x,y):
+ return x+y
+注意def是语句而lambda是表达式
+下面这种情况下就只能用lambda而不能用def
+<code>[(lambda x:x*x)(x) for x in range(1,11)]</code></p></li>
+</ol>
+
+
+<p>map，reduce，filter中的function都可以用lambda表达式来生成</p>
+
+<ol>
+<li><h2>max</h2>
+
+```python
+
+<blockquote><blockquote><blockquote><p>A = [("a",23), ("b", 11), ("c", 34)]
+max(A, key=lambda x: x[1])
+max(A, key=oprator.itemgetter(1))
+('c', 34)
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>filter</h2>
+
+filter 函数的功能相当于过滤器。
+调用一个布尔函数bool_func来迭代遍历每个seq中的元素；
+返回一个使bool_seq返回值为true的元素的序列。
+```python filter
+
+<blockquote><blockquote><blockquote><p>A = [("a",23), ("b", 11), ("c", 34)]
+filter(lambda x: x[1]>12, A)
+[('a', 23), ('c', 34)]
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>map</h2>
+
+map函数func作用于给定序列的每个元素，并用一个列表来提供返回值
+```python map
+
+<blockquote><blockquote><blockquote><p>A = [("a",23), ("b", 11), ("c", 34)]
+map(lambda x: x[1], A)   #or
+map(operator.itemgetter(1), A)
+[23, 11, 34]
+map(pow, (1, 2, 3), (5, 5, 5))
+[1, 32, 243]
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>reduce</h2>
+
+reduce函数，func为二元函数，将func作用于seq序列的元素，
+<code>每次携带一对（先前的结果以及下一个序列的元素）</code>
+连续的将现有的结果和下一个值作用在获得的随后的结果上，
+最后减少我们的序列为一个单一的返回值。
+```python map
+
+<blockquote><blockquote><blockquote><p>print reduce(lambda x,y:x+y,(1,2,3,4,5,6,7))
+28
+```</p></blockquote></blockquote></blockquote></li>
+<li><h2>itertools.cycle(iterable)</h2>
+
+Make an iterator returning elements from the iterable and saving a copy of each.
+When the iterable is exhausted, return elements from the saved copy.
+Repeats indefinitely. Equivalent to:
+```python
+def cycle(iterable):
+ # cycle('ABCD') --> A B C D A B C D A B C D ...
+ saved = []
+ for element in iterable:
+
+<pre><code> yield element
+ saved.append(element)
+</code></pre>
+
+ while saved:
+
+<pre><code> for element in saved:
+       yield element
+</code></pre>
+
+<p><code>``
+注意：因为cycle缓存了中间结果，如果iterable很长的话...
+</code>Note, this member of the toolkit may require significant auxiliary storage (depending on the length of the iterable).`</p></li>
+<li><h2>itertools.repeat()</h2>
+
+<p>python的heapq.py模块中有这样一个用法：
+<code>return map(heappop, repeat(h, min(n, len(h)))) #返回n个h（heappop n次）</code>
+其中heappop弹出headp的堆顶，并维护堆结构</p></li>
+</ol>
+
+
+<p><a href="http://stackoverflow.com/questions/9059173/what-is-the-purpose-in-pythons-itertools-repeat">stack overflow</a>
+The itertools.repeat function is lazy; it only uses the memory required for one item.
+On the other hand, the (a)*n and [a]*n idioms _ create n copies of the object in memory_.
+For five items, the multiplication idiom is probably better,
+but you might notice a resource problem if you had to repeat something, say, a million times.</p>
+
+<p>Minor quibble: [a]*n does not create n copies of a in memory.
+<strong> It creates n references to a single copy of a </strong>.
+In some cases the difference can be quite significant; try a = [[]]*5; a[0].append(1). – Thomas K Jan 30 '12 at 12:49</p>
+
+<p>Good point. I keep forgetting that almost <strong> everything in Python is a reference </strong>.<br/>
+I guess that also abates the memory usage problem somewhat,
+but I'd guess a million references still has a nontrivial resource requirement. – mlefavor Jan 30 '12 at 15:22</p>
+
+<p>Yep, it would still have to <strong> allocate an array of n pointers. </strong> – Thomas K Jan 30 '12 at 19:42</p>
+
+<ol>
+<li><h2>str.join()</h2>
+
+<p>可以用来将list快速转为str</p></li>
+</ol>
+
+
+<p>并且因为python中字符川都是常量(字符串创建后是只读的)，所以<strong> 大量字符 </strong>用+来链接字符串会不停地
+产生中间字符串，浪费内存
+<code>s = "aaa" + "aaa" + "aaa" + "aaa" + "aaa" + "aaa"</code>
+可以用join替代：
+<code>"".join("aaa","aaa","aaa","aaa","aaa","aaa","aaa","aaa","aaa","aaa",)</code></p>
+
+<p><a href="http://www.douban.com/group/topic/12795262/">引用</a>
+<code>python字符串相加效率并不比join低，相反效率更高。但每个加号都创造额外字符串，10个字符串相加就会再创造出9个字符串，但我们只要1个，所以用join，节约内存，而不是节约cpu</code>
+<code>python cookbook第一章有讲过,字符串对象是immutable，任何对字符串的操作都将创建一个新的字符串对象，而不是改变原来的对象.因此N个字符串相加必将丢弃中间N-1个结果, 只是两个字符串相加，效果不是很明显</code></p>
+
+<p> |  join(...)
+ |      S.join(iterable) -> string
+ |    <br/>
+ |      Return a string which is the concatenation of the strings in the
+ |      iterable.  The separator between elements is S.</p>
+
+<p>用array有<a href="http://www.python.org/doc/essays/list2str.html">更快</a>的表现</p>
+
+<ol>
+<li><h2><a href="http://woodpecker.org.cn/diveintopython/native_data_types/tuples.html">tuple</a></h2>
+
+<p>使用 tuple 有什么好处呢？</p></li>
+</ol>
+
+
+<p>Tuple 比 list 操作速度快。如果您定义了一个值的常量集，并且唯一要用它做的是不断地遍历它，请使用 tuple 代替 list。
+如果对不需要修改的数据进行 “写保护”，可以使代码更安全。使用 tuple 而不是 list 如同拥有一个隐含的 assert 语句，说明这一数据是常量。如果必须要改变这些值，则需要执行 tuple 到 list 的转换 (需要使用一个特殊的函数)。
+还记得我说过 dictionary keys 可以是字符串，整数和 “其它几种类型”吗？Tuples 就是这些类型之一。Tuples 可以在 dictionary 中被用做 key，但是 list 不行。实际上，事情要比这更复杂。Dictionary key 必须是不可变的。Tuple 本身是不可改变的，但是如果您有一个 list 的 tuple，那就认为是可变的了，用做 dictionary key 就是不安全的。只有字符串、整数或其它对 dictionary 安全的 tuple 才可以用作 dictionary key。
+Tuples 可以用在字符串格式化中，我们会很快看到。</p>
+]]></content>
+  </entry>
+  
+</feed>
